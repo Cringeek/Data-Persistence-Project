@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
-{
+{      
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
@@ -18,7 +18,12 @@ public class MainManager : MonoBehaviour
     
     private bool m_GameOver = false;
 
-    
+
+
+    public Text bestScoreText;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +41,11 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
+
+        ScoreText.text = $"{DataSave.playerName} Score: {m_Points}";
+        //bestScoreText.text = $"{DataSave.playerName}";
+
+
     }
 
     private void Update()
@@ -65,7 +75,7 @@ public class MainManager : MonoBehaviour
     void AddPoint(int point)
     {
         m_Points += point;
-        ScoreText.text = $"Score : {m_Points}";
+        ScoreText.text = $"Score {DataSave.playerName}: {m_Points}";
     }
 
     public void GameOver()
