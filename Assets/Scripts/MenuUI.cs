@@ -8,10 +8,12 @@ using UnityEngine.UI;
 public class MenuUI : MonoBehaviour
 {
     [SerializeField] private Text nameText;
+    public static string currentPlayerName;
    
     public void StartButton()
-    {
-        DataSave.playerName = nameText.text;
+    {     
+        currentPlayerName = nameText.text;
+        
         SceneManager.LoadScene(1);
     }
    

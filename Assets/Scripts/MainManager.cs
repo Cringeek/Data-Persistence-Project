@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
+
 public class MainManager : MonoBehaviour
 {      
     public Brick BrickPrefab;
@@ -42,8 +44,9 @@ public class MainManager : MonoBehaviour
             }
         }
 
-        ScoreText.text = $"{DataSave.playerName} Score: {m_Points}";
-        //bestScoreText.text = $"{DataSave.playerName}";
+        DataSave.LoadHighScore();
+                
+        bestScoreText.text = $"Best Score : {DataSave.playerName} : {DataSave.score}";
 
 
     }
@@ -75,11 +78,18 @@ public class MainManager : MonoBehaviour
     void AddPoint(int point)
     {
         m_Points += point;
-        ScoreText.text = $"Score {DataSave.playerName}: {m_Points}";
+        ScoreText.text = $"Score: {m_Points}";
     }
 
     public void GameOver()
     {
+        if (m_Points > DataSave.score)
+        {            
+            DataSave.score = m_Points;
+            DataSave.SaveHighScore(); 
+        }
+
+
         m_GameOver = true;
         GameOverText.SetActive(true);
     }
