@@ -83,10 +83,14 @@ public class MainManager : MonoBehaviour
 
     public void GameOver()
     {
+        DataSave.playerName = MenuUI.currentPlayerName;
+
         if (m_Points > DataSave.score)
         {            
             DataSave.score = m_Points;
-            DataSave.SaveHighScore(); 
+            DataSave.SaveHighScore();
+
+            bestScoreText.text = $"Best Score : {DataSave.playerName} : {DataSave.score}";
         }
 
 
